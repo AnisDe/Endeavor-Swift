@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "118607AD-1A38-4951-AC26-C4BBAC59DD75"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CD813AA0-8287-49FD-9DDA-2CF34209C8DD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mini_projet/View/ProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3"
+            endingLineNumber = "3"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "mini_projet/View/EditProfileView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "EditProfileView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - d39aea3bb20e1f9f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.user.getter : Swift.Optional&lt;mini_projet.User&gt;"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "232">
+               </Location>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - d91db45e0618ef93"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.user.setter : Swift.Optional&lt;mini_projet.User&gt;"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "252">
+               </Location>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - e111617055d76970"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.user.modify : Swift.Optional&lt;mini_projet.User&gt;"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - 335116fe7fe564f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.user.modify : Swift.Optional&lt;mini_projet.User&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - 15aeec2a1e752d1b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; mini_projet.EditProfileView"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "BE37D8E4-B6DC-4382-8E10-BF778EBA2679 - a226bf31697e85ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "mini_projet.EditProfileView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;mini_projet.EditProfileView&gt;"
+                  moduleName = "mini_projet"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anisdemni/Desktop/dossier%20sans%20titre%202/mini_projet/mini_projet/View/EditProfileView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
