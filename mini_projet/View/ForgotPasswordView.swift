@@ -57,6 +57,7 @@ class ForgotPasswordView: UIViewController {
             } else {
                 self.present(Alert.makeAlert(titre: "Warning", message: "We could not find an account linked to this email"), animated: true)
             }
+            self.performSegue(withIdentifier: "loginFogetSegue", sender: nil)
         }
     }
     

@@ -18,8 +18,9 @@ class SignInView: UIViewController {
     var data : SignInData?
 
     // iboutlets
-       @IBOutlet weak var UsernameTF: UITextField!
-       @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var Username: UITextField!
+    
+    @IBOutlet weak var Password: UITextField!
     
     // protocols
     
@@ -41,25 +42,29 @@ class SignInView: UIViewController {
     @IBAction func Login(_ sender: Any) {
         
         data = SignInData(
-            username: UsernameTF.text,
-            password: passwordTF.text
+            username: Username.text,
+            password: Password.text
         
         )
         
-        let userDefaults = UserDefaults()
         
-        userDefaults.set(UsernameTF.text, forKey: "username")
-        
-        UserViewModel().login(username: (data?.username)! , password: (data?.password)!) { success in
+            UserViewModel().login(username: (data?.username)! , password: (data?.password)!, completed: { (success, response) in
             if (success) {
-                let action = UIAlertAction(title: "Proceed", style: .default) { promptAction in
-                    
-                }
-                self.present(Alert.makeSingleActionAlert(titre: "Login", message: "Logged In", action: action), animated: true)
+               
+                let user = response as! User
+                                
+                                if (user.isVerified!) {
+                                    self.performSegue(withIdentifier: "profileSegue", sender: nil)
+                                }
+                                else {
+                                    let action = UIAlertAction(title: "Proceed", style: .default) { promptAction in
+                                        
+                                    }
+                                    self.present(Alert.makeActionAlert(titre: "Notice", message: "The email linked to this account is not confirmed ", action: action), animated: true)
+                                }
             } else {
                 self.present(Alert.makeAlert(titre: "Warning", message: "wrong password or username "), animated: true)
             }
-        }
-
-    }
-}
+         })
+     }
+ }

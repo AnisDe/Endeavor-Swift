@@ -11,13 +11,12 @@ import UIKit
 class ProfileView: UIViewController{
     
     
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var email: UILabel!
-    @IBOutlet weak var name: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nameValue  = UserDefaults.value(forKey: "username") as? String
-         name.text = nameValue
+        username.text = UserDefaults.standard.object(forKey: "username") as? String
+        email.text = UserDefaults.standard.object(forKey: "email") as? String
     }
     
     

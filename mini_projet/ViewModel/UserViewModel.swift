@@ -58,18 +58,36 @@ class UserViewModel {
             }
     }
     
-    func login(username: String, password: String, completed: @escaping (Bool) -> Void ) {
+    func login(username: String, password: String, completed: @escaping (Bool ,Any?) -> Void ) {
         AF.request("http://localhost:3000/login",
                    method: .post,
                    parameters: ["username": username, "password": password],encoder: JSONParameterEncoder.default)
             .response { response in
+                
                 switch response.result {
-                case .success:
-                    print("Success")
-                    completed(true)
+                case .success(let data):
+                    do {
+                         let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                        let user = (json as AnyObject).value(forKey: "user") as! Dictionary<String, AnyObject>
+                        let email = (user as AnyObject).value(forKey: "email") as! String
+
+                        let username = (user as AnyObject).value(forKey: "username") as! String
+                        let isVerified = (user as AnyObject).value(forKey: "isVerified") as! Bool
+                        let isAdmin = (user as AnyObject).value(forKey: "isAdmin") as! Bool
+                        
+                        let logedUser = User(username: username, email: email , isAdmin:isAdmin , isVerified: isVerified )
+                        
+                        UserDefaults.standard.set(username, forKey: "username")
+                        UserDefaults.standard.set(email, forKey: "email")
+                         print(logedUser)
+                        completed(true , logedUser)
+                    }
+                    catch{
+                        completed(false , nil)
+                    }
                 case let .failure(error):
                     print(error)
-                    completed(false)
+                    completed(false , nil)
                 }
             }
     }
@@ -117,11 +135,10 @@ class UserViewModel {
         AF.request("http://localhost:3000/user/editProfile",
                    method: .post,
                    parameters: [
-                    "_id" : user._id!,
+                    //"_id" : user._id!,
                     "username": user.username!,
                     "email": user.email!,
                     //"password": user.password!,
-                    "phone": user.phone!
                    ])
             .response { response in
                 switch response.result {
@@ -161,10 +178,10 @@ class UserViewModel {
     
     func makeUser(jsonItem: JSON) -> User {
         User(
-            _id: jsonItem["_id"].stringValue,
+            //_id: jsonItem["_id"].stringValue,
             username: jsonItem["username"].stringValue,
-            email: jsonItem["email"].stringValue,
-            password: jsonItem["password"].stringValue
+            email: jsonItem["email"].stringValue
+            //password: jsonItem["password"].stringValue
 
         )
     }

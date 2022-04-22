@@ -15,11 +15,16 @@ class EditProfileView: UIViewController, SecondModalTransitionListener {
     
     
     // variables
-    var user : User?
     
+    var user : User?
+
     // iboutlets
+        
+    
+    @IBOutlet weak var usernameTF: UITextField!
+    
     @IBOutlet weak var emailTF: UITextField!
-    @IBOutlet weak var nameTF: UITextField!
+    
     
     // protocols
     
@@ -27,7 +32,11 @@ class EditProfileView: UIViewController, SecondModalTransitionListener {
     override func viewDidLoad() {
         super.viewDidLoad()
         SecondModalTransitionMediator.instance.setListener(listener: self)
+        emailTF.placeholder = "test"
         
+        usernameTF.placeholder = UserDefaults.standard.object(forKey: "username") as? String
+        emailTF.placeholder = UserDefaults.standard.object(forKey: "email") as? String
+
     }
     
     
@@ -44,13 +53,13 @@ class EditProfileView: UIViewController, SecondModalTransitionListener {
     // actions
     @IBAction func confirmChanges(_ sender: Any) {
         
-        if nameTF.text!.isEmpty  {
+        if usernameTF.text!.isEmpty  {
             self.present(Alert.makeAlert(titre: "Warning", message: "You must fill all the fields"), animated: true)
             return
         }
         
         //user?.email = emailTF.text
-        user?.username = nameTF.text
+        user?.username = usernameTF.text
         
         
         UserViewModel().editProfile(user: user!) { success in
