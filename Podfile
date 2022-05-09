@@ -8,4 +8,7 @@ target 'mini_projet' do
   # Pods for mini_projet
   pod "SwiftyJSON"
   pod "Alamofire"
+  pod 'FBSDKLoginKit'
+  
+
 end

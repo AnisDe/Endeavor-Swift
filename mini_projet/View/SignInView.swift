@@ -5,8 +5,10 @@
 //  Created by Anis Demni on 12/4/2022.
 //
 
+import AuthenticationServices
 import Foundation
 import UIKit
+import Alamofire
 
 class SignInView: UIViewController {
     
@@ -22,6 +24,8 @@ class SignInView: UIViewController {
     
     @IBOutlet weak var Password: UITextField!
     
+    private let signInWithApple = ASAuthorizationAppleIDButton()
+    
     // protocols
     
     // life cycle
@@ -31,13 +35,28 @@ class SignInView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(signInWithApple)
         
     }
     
     // methods
   
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        signInWithApple.frame = CGRect(x: 73, y: 526, width: 250, height: 50)
+        signInWithApple.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+    }
     
     // actions
+    
+    @objc func didTapSignIn () {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName , .email]
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        
+        controller.performRequests()
+    }
     
     @IBAction func Login(_ sender: Any) {
         
@@ -68,3 +87,29 @@ class SignInView: UIViewController {
          })
      }
  }
+
+extension SignInView: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController , didCompleteWithError error :Error)  {
+        print("failed!")
+    }
+    func authorizationController(controller: ASAuthorizationController , didCompleteWithAuthorization authorization:ASAuthorization)  {
+        switch authorization.credential {
+        case let credentials as ASAuthorizationAppleIDCredential:
+            let firstName = credentials.fullName?.givenName
+            let email = credentials.email
+            
+            UserDefaults.standard.set(firstName, forKey: "username")
+            UserDefaults.standard.set(email, forKey: "email")
+            let profile = self.storyboard?.instantiateViewController(withIdentifier: "profileView")
+            self.present(profile!, animated: true, completion: nil)
+        default:
+            print("something went wrong")
+        }
+    }
+}
+extension SignInView : ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor (for controller: ASAuthorizationController) -> ASPresentationAnchor{
+        return view.window!
+    }
+}
+

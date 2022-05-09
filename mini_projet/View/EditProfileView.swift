@@ -8,72 +8,67 @@
 import Foundation
 import UIKit
 
-class EditProfileView: UIViewController, SecondModalTransitionListener {
-    func popoverDismissed() {
-        
+class EditProfileView: UIViewController {
+    
+    struct SignInData {
+         var username: String?
     }
-    
-    
-    // variables
-    
-    var user : User?
+    var data : SignInData?
 
-    // iboutlets
-        
+    // iboutlets
+    @IBOutlet weak var username: UITextField!
     
-    @IBOutlet weak var usernameTF: UITextField!
-    
-    @IBOutlet weak var emailTF: UITextField!
     
     
     // protocols
     
     // life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        SecondModalTransitionMediator.instance.setListener(listener: self)
-        emailTF.placeholder = "test"
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        usernameTF.placeholder = UserDefaults.standard.object(forKey: "username") as? String
-        emailTF.placeholder = UserDefaults.standard.object(forKey: "email") as? String
-
     }
     
-    
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        ModalTransitionMediator.instance.sendPopoverDismissed(modelChanged: true)
+    override func viewDidLoad() {
+        username.placeholder = UserDefaults.standard.object(forKey: "username") as? String
+        super.viewDidLoad()
+        
     }
     
     // methods
-    
-    
-    
+  
     
     // actions
-    @IBAction func confirmChanges(_ sender: Any) {
-        
-        if usernameTF.text!.isEmpty  {
-            self.present(Alert.makeAlert(titre: "Warning", message: "You must fill all the fields"), animated: true)
-            return
-        }
-        
-        //user?.email = emailTF.text
-        user?.username = usernameTF.text
-        
-        
-        UserViewModel().editProfile(user: user!) { success in
-            if success {
-                let action = UIAlertAction(title: "Proceed", style: .default) { UIAlertAction in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                self.present(Alert.makeSingleActionAlert(titre: "Success", message: "Profile edited successfully", action: action), animated: true)
-            } else {
-                self.present(Alert.makeAlert(titre: "Error", message: "Could not edit your profile"), animated: true)
-            }
-        }
-    }
     
-   
-}
-
+    @IBAction func updateProfile(_ sender: Any) {
+        
+        data = SignInData(
+            username: username.text
+        )
+        
+        
+            UserViewModel().editProfile(username: (data?.username)! , completed: { (success , response) in
+                if (success) {
+                                        if (response != nil) {
+                                        let action = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
+                                            let profile = self.storyboard?.instantiateViewController(withIdentifier: "profileView")
+                                            self.present(profile!, animated: true, completion: nil)
+                                        }
+                                        self.present(Alert.makeSingleActionAlert(titre: "Notice", message: "Profile Updated", action: action), animated: true)
+                                    }
+                                    else {
+                                        self.present(Alert.makeAlert(titre: "Notice", message: "We could not update your profile"), animated: true)
+                                    }
+                } else {
+                    let action = UIAlertAction(title: "OK", style: .default) { (action) -> Void in
+                        let profile = self.storyboard?.instantiateViewController(withIdentifier: "profileView")
+                        self.present(profile!, animated: true, completion: nil)
+                    }
+                    self.present(Alert.makeSingleActionAlert(titre: "Warning", message: "We could not update your profile", action: action), animated: true)
+                }
+                
+                
+                
+                
+         })
+     }
+    
+ }

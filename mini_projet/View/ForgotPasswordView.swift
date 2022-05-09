@@ -50,10 +50,7 @@ class ForgotPasswordView: UIViewController {
         )
         UserViewModel().forgotPassword(email: (data?.email)!) { success in
             if (success) {
-                let action = UIAlertAction(title: "Proceed", style: .default) { promptAction in
-                    
-                }
-                self.present(Alert.makeSingleActionAlert(titre: "Notice", message: "The password reset email has been sent to " + self.emailTF.text! + ", please open the link to reset your password.", action: action), animated: true)
+                self.present(Alert.makeAlert(titre: "Notice", message: "The password reset email has been sent to " + self.emailTF.text! + ", please open the link to reset your password."), animated: true)
             } else {
                 self.present(Alert.makeAlert(titre: "Warning", message: "We could not find an account linked to this email"), animated: true)
             }

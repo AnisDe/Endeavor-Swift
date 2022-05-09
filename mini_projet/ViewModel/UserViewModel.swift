@@ -70,15 +70,17 @@ class UserViewModel {
                          let json = try JSONSerialization.jsonObject(with: data!, options: [])
                         let user = (json as AnyObject).value(forKey: "user") as! Dictionary<String, AnyObject>
                         let email = (user as AnyObject).value(forKey: "email") as! String
-
+                        let _id = (user as AnyObject).value(forKey: "_id") as! String
                         let username = (user as AnyObject).value(forKey: "username") as! String
                         let isVerified = (user as AnyObject).value(forKey: "isVerified") as! Bool
                         let isAdmin = (user as AnyObject).value(forKey: "isAdmin") as! Bool
                         
-                        let logedUser = User(username: username, email: email , isAdmin:isAdmin , isVerified: isVerified )
+                        let logedUser = User(_id:_id,username: username, email: email , isAdmin:isAdmin , isVerified: isVerified )
                         
                         UserDefaults.standard.set(username, forKey: "username")
                         UserDefaults.standard.set(email, forKey: "email")
+                        UserDefaults.standard.set(_id, forKey: "_id")
+
                          print(logedUser)
                         completed(true , logedUser)
                     }
@@ -118,7 +120,7 @@ class UserViewModel {
                     "email": email!,
                     "newPassword": newPassword!
                    ])
-            .response { response in
+            .response{ response in
                 switch response.result {
                 case .success:
                     print("Success")
@@ -130,24 +132,27 @@ class UserViewModel {
             }
     }
     
-    func editProfile(user: User, completed: @escaping (Bool) -> Void ) {
-        
-        AF.request("http://localhost:3000/user/editProfile",
+    func editProfile(username: String,  completed: @escaping (Bool ,Any?) -> Void ) {
+
+        AF.request("http://localhost:3000/edit/\(UserDefaults.standard.object(forKey: "_id")!)",
                    method: .post,
-                   parameters: [
-                    //"_id" : user._id!,
-                    "username": user.username!,
-                    "email": user.email!,
-                    //"password": user.password!,
-                   ])
+                   parameters: ["username": username],encoder: JSONParameterEncoder.default)
             .response { response in
+                
                 switch response.result {
-                case .success:
-                    print("Success")
-                    completed(true)
+                case .success(let data):
+                    do{
+                        let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                        
+                        let user = (json as AnyObject).value(forKey: "user")! as AnyObject
+                        UserDefaults.standard.set(username, forKey: "username")
+                        completed(true ,user )
+                    }
+                    catch {completed(false , nil  )}
+                    
                 case let .failure(error):
                     print(error)
-                    completed(false)
+                    completed(false, nil )
                 }
             }
     }
